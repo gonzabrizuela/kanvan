@@ -1,11 +1,11 @@
-﻿using Servicio.Shared.Enum;
+﻿using Kanban.Shared.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
 
-namespace Servicio.Client.HelperService
+namespace Kanban.Client.HelperService
 {
     public class ToastService : IDisposable
     {

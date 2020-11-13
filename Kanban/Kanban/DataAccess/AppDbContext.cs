@@ -10,7 +10,7 @@ namespace Kanban.Server.DataAccess
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<Trabajosefec> Trabajosefec { get; set; }
+        public DbSet<Estado> Estado { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         { }
 
