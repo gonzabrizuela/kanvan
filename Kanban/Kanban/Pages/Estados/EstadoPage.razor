@@ -1,14 +1,18 @@
 ﻿@page "/kanban"
+
 @using Syncfusion.Blazor.Kanban
+@using System.Diagnostics
 
 <SfKanban TValue="TasksModel" KeyField="Status" DataSource="Tasks">
+    <KanbanEvents TValue="TasksModel" DragStart="@onDragStart" DragStop="@onDragStop"></KanbanEvents>
     <KanbanColumns>
-        <KanbanColumn HeaderText="To Do" KeyField="Open"></KanbanColumn>
-        <KanbanColumn HeaderText="In Progress" KeyField="InProgress"></KanbanColumn>
-        <KanbanColumn HeaderText="Testing" KeyField="Testing"></KanbanColumn>
-        <KanbanColumn HeaderText="Done" KeyField="Close"></KanbanColumn>
+        <KanbanColumn HeaderText="Backlog" KeyField=@(new List<string> { "Open" })></KanbanColumn>
+        <KanbanColumn HeaderText="In Progress" KeyField=@(new List<string> { "InProgress" })></KanbanColumn>
+        <KanbanColumn HeaderText="Testing" KeyField=@(new List<string> { "Testing" })></KanbanColumn>
+        <KanbanColumn HeaderText="Done" KeyField=@(new List<string> { "Close" })></KanbanColumn>
     </KanbanColumns>
-    <KanbanCardSettings HeaderField="Title" ContentField="Summary"></KanbanCardSettings>
+    <KanbanCardSettings HeaderField="Id" ContentField="Summary"></KanbanCardSettings>
+    <KanbanSwimlaneSettings KeyField="Assignee" AllowDragAndDrop="true"></KanbanSwimlaneSettings>
 </SfKanban>
 
 @code {
@@ -18,17 +22,40 @@
         public string Title { get; set; }
         public string Status { get; set; }
         public string Summary { get; set; }
+        public string Assignee { get; set; }
+    }
+    public string assignee;
+    public string status;
+    public string id;
+
+    private void onDragStart(Syncfusion.Blazor.Kanban.DragEventArgs<TasksModel> args)
+    {
+        id = args.Data[0].Id;
+        assignee = args.Data[0].Assignee;
+        status = args.Data[0].Status;
+    }
+
+    private void onDragStop(Syncfusion.Blazor.Kanban.DragEventArgs<TasksModel> args)
+    {
+        if (args.Data[0].Assignee != assignee || args.Data[0].Status != status)
+        {
+            // Preventing the drag action from the one swimlane to other swimlane and between different columns
+            args.Cancel = true;
+        }
     }
 
     public List<TasksModel> Tasks = new List<TasksModel>()
 {
-        new TasksModel { Id = "Task 1", Title = "BLAZ-29001", Status = "Open", Summary = "Analyze the new requirements gathered from the customer." },
-        new TasksModel { Id = "Task 2", Title = "BLAZ-29002", Status = "Open", Summary = "Show the retrieved data from the server in grid control." },
-        new TasksModel { Id = "Task 3", Title = "BLAZ-29003", Status = "InProgress", Summary = "Improve application performance" },
-        new TasksModel { Id = "Task 4", Title = "BLAZ-29004", Status = "Testing", Summary = "Fix the issues reported by the customer." },
-        new TasksModel { Id = "Task 5", Title = "BLAZ-29005", Status = "Testing", Summary = "Fix the issues reported in Safari browser." },
-        new TasksModel { Id = "Task 6", Title = "BLAZ-29006", Status = "Close", Summary = "Analyze SQL server 2008 connection." },
-        new TasksModel { Id = "Task 7", Title = "BLAZ-29007", Status = "Close", Summary = "Analyze grid control." },
-        new TasksModel { Id = "Task 8", Title = "BLAZ-29008", Status = "Close", Summary = "Stored procedure for initial data binding of the grid." }
+        new TasksModel { Id = "Task 1", Title = "BLAZ-29001", Status = "InProgress", Summary = "Improve application performance", Assignee = "Andrew Fuller" },
+        new TasksModel { Id = "Task 2", Title = "BLAZ-29002", Status = "Open", Summary = "Arrange a web meeting with the customer to get new requirements.", Assignee = "Janet Leverling" },
+        new TasksModel { Id = "Task 3", Title = "BLAZ-29003", Status = "InProgress", Summary = "Fix the issues reported in the IE browser.", Assignee = "Janet Leverling" },
+        new TasksModel { Id = "Task 4", Title = "BLAZ-29004", Status = "InProgress", Summary = "Fix cannot open user’s default database SQL error.", Assignee = "Janet Leverling" },
+        new TasksModel { Id = "Task 5", Title = "BLAZ-29005", Status = "Review", Summary = "Fix the issues reported in data binding.", Assignee = "Janet Leverling" },
+        new TasksModel { Id = "Task 6", Title = "BLAZ-29006", Status = "Close", Summary = "Analyze SQL server 2008 connection.", Assignee = "Andrew Fuller" },
+        new TasksModel { Id = "Task 7", Title = "BLAZ-29007", Status = "Close", Summary = "Analyze stored procedures.", Assignee = "Janet Leverling" },
+        new TasksModel { Id = "Task 8", Title = "BLAZ-29008", Status = "Open", Summary = "Enhance editing functionality.", Assignee = "Andrew Fuller" },
+        new TasksModel { Id = "Task 9", Title = "BLAZ-29009", Status = "Review", Summary = "Fix the editing issues reported by the customer.", Assignee = "Janet Leverling" },
+        new TasksModel { Id = "Task 10", Title = "BLAZ-29010", Status = "Testing", Summary = "Fix the issues reported in data binding.", Assignee = "Janet Leverling" },
+        new TasksModel { Id = "Task 11", Title = "BLAZ-29011", Status = "Testing", Summary = "Test editing feature in the IE browser.", Assignee = "Janet Leverling" }
     };
 }
