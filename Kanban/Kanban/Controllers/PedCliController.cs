@@ -12,48 +12,48 @@ namespace Kanban.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EstadoController : ControllerBase
+    public class PedCliController : ControllerBase
     {
         private readonly AppDbContext _context;
 
-        public EstadoController(AppDbContext context)
+        public PedCliController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Estado
+        // GET: api/PedCli
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Estado>>> GetEstado()
+        public async Task<ActionResult<IEnumerable<PedCli>>> GetPedCli()
         {
-            return await _context.Estado.ToListAsync();
+            return await _context.PedCli.ToListAsync();
         }
 
-        // GET: api/Estado/5
+        // GET: api/PedCli/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Estado>> GetEstado(int id)
+        public async Task<ActionResult<PedCli>> GetPedCli(int id)
         {
-            var Estado = await _context.Estado.FindAsync(id);
+            var PedCli = await _context.PedCli.FindAsync(id);
 
-            if (Estado == null)
+            if (PedCli == null)
             {
                 return NotFound();
             }
 
-            return Estado;
+            return PedCli;
         }
 
         // PUT: api/Estado/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEstado(int id, Estado Estado)
+        public async Task<IActionResult> PutPedCli(int id, PedCli PedCli)
         {
-            if (id != Estado.Id)
+            if (id != PedCli.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(Estado).State = EntityState.Modified;
+            _context.Entry(PedCli).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +61,7 @@ namespace Kanban.Server.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EstadoExists(id))
+                if (!PedCliExists(id))
                 {
                     return NotFound();
                 }
@@ -74,20 +74,20 @@ namespace Kanban.Server.Controllers
             return NoContent();
         }
 
-        // POST: api/Estado
+        // POST: api/PedCli
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Estado>> PostEstado(Estado Estado)
+        public async Task<ActionResult<PedCli>> PostPedCli(PedCli PedCli)
         {
-            _context.Estado.Add(Estado);
+            _context.PedCli.Add(PedCli);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (EstadoExists(Estado.Id))
+                if (PedCliExists(PedCli.Id))
                 {
                     return Conflict();
                 }
@@ -97,28 +97,28 @@ namespace Kanban.Server.Controllers
                 }
             }
 
-            return CreatedAtAction("GetEstado", new { id = Estado.Id }, Estado);
+            return CreatedAtAction("GetPedCli", new { id = PedCli.Id }, PedCli);
         }
 
-        // DELETE: api/Estado/5
+        // DELETE: api/PedCli/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Estado>> DeleteEstado(int id)
+        public async Task<ActionResult<PedCli>> DeletePedCli(int id)
         {
-            var Estado = await _context.Estado.FindAsync(id);
-            if (Estado == null)
+            var PedCli = await _context.PedCli.FindAsync(id);
+            if (PedCli == null)
             {
                 return NotFound();
             }
 
-            _context.Estado.Remove(Estado);
+            _context.PedCli.Remove(PedCli);
             await _context.SaveChangesAsync();
 
-            return Estado;
+            return PedCli;
         }
 
-        private bool EstadoExists(int id)
+        private bool PedCliExists(int id)
         {
-            return _context.Estado.Any(e => e.Id == id);
+            return _context.PedCli.Any(e => e.Id == id);
         }
     }
 }

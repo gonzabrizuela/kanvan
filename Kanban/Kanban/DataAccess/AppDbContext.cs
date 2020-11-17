@@ -10,7 +10,11 @@ namespace Kanban.Server.DataAccess
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<Estado> Estado { get; set; }
+      
+        public DbSet<PedCli> PedCli { get; set; }
+
+        public DbSet<Pedidos> Pedidos { get; set; }
+
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         { }
 
