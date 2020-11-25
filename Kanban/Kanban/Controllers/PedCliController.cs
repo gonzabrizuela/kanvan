@@ -29,10 +29,10 @@ namespace Kanban.Server.Controllers
         }
 
         // GET: api/PedCli/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<PedCli>> GetPedCli(int id)
+        [HttpGet("{PEDIDO}")]
+        public async Task<ActionResult<PedCli>> GetPedCli(int PEDIDO)
         {
-            var PedCli = await _context.PedCli.FindAsync(id);
+            var PedCli = await _context.PedCli.FindAsync(PEDIDO);
 
             if (PedCli == null)
             {
@@ -45,7 +45,7 @@ namespace Kanban.Server.Controllers
         // PUT: api/Estado/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
+        [HttpPut("{PEDIDO}")]
         public async Task<IActionResult> PutPedCli(int PEDIDO, PedCli PedCli)
         {
             if (PEDIDO != PedCli.PEDIDO)
@@ -101,7 +101,7 @@ namespace Kanban.Server.Controllers
         }
 
         // DELETE: api/PedCli/5
-        [HttpDelete("{id}")]
+        [HttpDelete("{PEDIDO}")]
         public async Task<ActionResult<PedCli>> DeletePedCli(int PEDIDO)
         {
             var PedCli = await _context.PedCli.FindAsync(PEDIDO);

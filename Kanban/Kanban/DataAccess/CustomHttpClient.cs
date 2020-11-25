@@ -17,6 +17,7 @@ namespace Kanban
         public async Task<T> GetFromJsonAsync<T>(string requestUri)
         {
             HttpClient httpClient = new HttpClient();
+            
             var httpContent = await httpClient.GetAsync(serverUri + requestUri);
             string jsonContent = httpContent.Content.ReadAsStringAsync().Result;
             T obj = JsonConvert.DeserializeObject<T>(jsonContent);

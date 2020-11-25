@@ -2,30 +2,39 @@
 
 @using Syncfusion.Blazor.Kanban
 @using System.Diagnostics
+@inherits Kanban.Pages.Modelos.ModeloPageBase
 
-<SfKanban TValue="KanbanModel" KeyField="CG_ESTADPEDCLI" DataSource="Tasks">
+<SfKanban TValue="PedCli" KeyField="@nameof(PedCli.CG_ESTADPEDCLI)" DataSource="Pedclis">
     <KanbanColumns>
-         @foreach (ColumnModel item in columnData)
-            {
-                 <KanbanColumn HeaderText="@item.HeaderText" KeyField="@item.KeyField"></KanbanColumn>
-            }
+        @foreach (ColumnModel item in columnData)
+        {
+            <KanbanColumn HeaderText="@item.HeaderText" KeyField="@item.KeyField"></KanbanColumn>
+        }
     </KanbanColumns>
-    <KanbanCardSettings HeaderField="Title" ContentField="Summary"></KanbanCardSettings>
-    <KanbanSwimlaneSettings KeyField="Assignee" TextField="Assignee" AllowDragAndDrop=false ShowItemCount=true SortDirection=SortDirection.Ascending ShowEmptyRow=true>
+    <KanbanCardSettings HeaderField="@nameof(PedCli.PEDIDO)" ContentField="@nameof(PedCli.PEDIDO)"></KanbanCardSettings>
+    <KanbanSwimlaneSettings KeyField="@nameof(PedCli.CG_ESTADPEDCLI)" TextField="@nameof(PedCli.PEDIDO)" AllowDragAndDrop=false ShowItemCount=true SortDirection=SortDirection.Ascending ShowEmptyRow=true>
     </KanbanSwimlaneSettings>
 </SfKanban>
 
+<div class="col-lg-12 control-section">
+    <div class="content-wrapper">
+        <div class="row">
+            <Syncfusion.Blazor.Grids.SfGrid AllowReordering="true" ShowColumnChooser="true" ShowColumnMenu="true" AllowResizing="true" EnablePersistence="true"
+                    @ref="Grid" DataSource="@Pedclis" AllowExcelExport="true" AllowRowDragAndDrop="true" AllowGrouping="true"
+                    AllowSorting="true" AllowPaging="true" AllowFiltering="true">
+                <Syncfusion.Blazor.Grids.GridColumns>
+                    <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(PedCli.PEDIDO) HeaderText="Id" IsPrimaryKey="true" Width="200"></Syncfusion.Blazor.Grids.GridColumn>
+                    <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(PedCli.ORCO) HeaderText="Marca" Width="200"></Syncfusion.Blazor.Grids.GridColumn>
+                </Syncfusion.Blazor.Grids.GridColumns>
+            </Syncfusion.Blazor.Grids.SfGrid>
+        </div>
+    </div>
+</div>
+
+
 @code {
-    List<PedCli> Pedclis = new List<PedCli>();
-
-    protected override async Task OnInitializedAsync()
-    {
-        //Pedclis = await Http.GetFromJsonAsync<List<Modelo>>("api/Modelo");
-
-        await base.OnInitializedAsync();
-    }
     private List<ColumnModel> columnData = new List<ColumnModel>() {
-        new ColumnModel(){ HeaderText= "Remitos", KeyField= new List<string>() { "R" } },
+        new ColumnModel(){ HeaderText= "Remitos", KeyField= new List<string>() { "4" } },
         new ColumnModel(){ HeaderText= "Retira en Planta", KeyField= new List<string>() { "L" } },
         new ColumnModel(){ HeaderText= "Retira en CABA", KeyField= new List<string>() { "C" } },
         new ColumnModel(){ HeaderText= "Entrega AERRE", KeyField= new List<string>() { "E" } },
