@@ -29,10 +29,10 @@ namespace Kanban.Server.Controllers
         }
 
         // GET: api/PedCli/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<PedCli>> GetPedCli(int id)
+        [HttpGet("{PEDIDO}")]
+        public async Task<ActionResult<PedCli>> GetPedCli(int PEDIDO)
         {
-            var PedCli = await _context.PedCli.FindAsync(id);
+            var PedCli = await _context.PedCli.FindAsync(PEDIDO);
 
             if (PedCli == null)
             {
@@ -45,10 +45,10 @@ namespace Kanban.Server.Controllers
         // PUT: api/Estado/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutPedCli(int id, PedCli PedCli)
+        [HttpPut("{PEDIDO}")]
+        public async Task<IActionResult> PutPedCli(int PEDIDO, PedCli PedCli)
         {
-            if (id != PedCli.Id)
+            if (PEDIDO != PedCli.PEDIDO)
             {
                 return BadRequest();
             }
@@ -61,7 +61,7 @@ namespace Kanban.Server.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PedCliExists(id))
+                if (!PedCliExists(PEDIDO))
                 {
                     return NotFound();
                 }
@@ -87,7 +87,7 @@ namespace Kanban.Server.Controllers
             }
             catch (DbUpdateException)
             {
-                if (PedCliExists(PedCli.Id))
+                if (PedCliExists(PedCli.PEDIDO))
                 {
                     return Conflict();
                 }
@@ -97,14 +97,14 @@ namespace Kanban.Server.Controllers
                 }
             }
 
-            return CreatedAtAction("GetPedCli", new { id = PedCli.Id }, PedCli);
+            return CreatedAtAction("GetPedCli", new { PEDIDO = PedCli.PEDIDO }, PedCli);
         }
 
         // DELETE: api/PedCli/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<PedCli>> DeletePedCli(int id)
+        [HttpDelete("{PEDIDO}")]
+        public async Task<ActionResult<PedCli>> DeletePedCli(int PEDIDO)
         {
-            var PedCli = await _context.PedCli.FindAsync(id);
+            var PedCli = await _context.PedCli.FindAsync(PEDIDO);
             if (PedCli == null)
             {
                 return NotFound();
@@ -116,9 +116,9 @@ namespace Kanban.Server.Controllers
             return PedCli;
         }
 
-        private bool PedCliExists(int id)
+        private bool PedCliExists(int PEDIDO)
         {
-            return _context.PedCli.Any(e => e.Id == id);
+            return _context.PedCli.Any(e => e.PEDIDO == PEDIDO);
         }
     }
 }
