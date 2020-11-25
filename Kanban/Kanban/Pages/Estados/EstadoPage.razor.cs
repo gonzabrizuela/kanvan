@@ -17,15 +17,17 @@ namespace Kanban.Pages.Modelos
     {
         [Inject] protected CustomHttpClient Http { get; set; }
         [Inject] protected IJSRuntime JsRuntime { get; set; }
-        protected SfGrid<Estado> Grid;
+        protected SfGrid<LOGISTICA> Grid;
 
         public bool Enabled = true;
         public bool Disabled = false;
 
-        protected List<Estado> estados = new List<Estado>();
+        protected List<PedCli> Pedclis = new List<PedCli>();
+        protected List<LOGISTICA> Logisticas = new List<LOGISTICA>();
         protected override async Task OnInitializedAsync()
         {
-            estados = await Http.GetFromJsonAsync<List<Estado>>("api/Estado");
+            Pedclis = await Http.GetFromJsonAsync<List<PedCli>>("api/Pedcli");
+            Logisticas = await Http.GetFromJsonAsync<List<LOGISTICA>>("api/LOGISTICA");
 
             await base.OnInitializedAsync();
         }

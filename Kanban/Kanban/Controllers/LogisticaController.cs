@@ -12,48 +12,48 @@ namespace Kanban.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PedCliController : ControllerBase
+    public class LogisticaController : ControllerBase
     {
         private readonly AppDbContext _context;
 
-        public PedCliController(AppDbContext context)
+        public LogisticaController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/PedCli
+        // GET: api/LOGISTICA
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PedCli>>> GetPedCli()
+        public async Task<ActionResult<IEnumerable<LOGISTICA>>> GetEstado()
         {
-            return await _context.PedCli.ToListAsync();
+            return await _context.LOGISTICA.ToListAsync();
         }
 
-        // GET: api/PedCli/5
+        // GET: api/LOGISTICA/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<PedCli>> GetPedCli(int id)
+        public async Task<ActionResult<LOGISTICA>> GetLOGISTICA(int PEDIDO)
         {
-            var PedCli = await _context.PedCli.FindAsync(id);
+            var LOGISTICA = await _context.LOGISTICA.FindAsync(PEDIDO);
 
-            if (PedCli == null)
+            if (LOGISTICA == null)
             {
                 return NotFound();
             }
 
-            return PedCli;
+            return LOGISTICA;
         }
 
         // PUT: api/Estado/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPedCli(int PEDIDO, PedCli PedCli)
+        public async Task<IActionResult> PutLOGISTICA(int Id, LOGISTICA LOGISTICA)
         {
-            if (PEDIDO != PedCli.PEDIDO)
+            if (Id != LOGISTICA.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(PedCli).State = EntityState.Modified;
+            _context.Entry(LOGISTICA).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +61,7 @@ namespace Kanban.Server.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PedCliExists(PEDIDO))
+                if (!LOGISTICAExists(Id))
                 {
                     return NotFound();
                 }
@@ -74,20 +74,20 @@ namespace Kanban.Server.Controllers
             return NoContent();
         }
 
-        // POST: api/PedCli
+        // POST: api/LOGISTICA
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<PedCli>> PostPedCli(PedCli PedCli)
+        public async Task<ActionResult<LOGISTICA>> PostLOGISTICA(LOGISTICA LOGISTICA)
         {
-            _context.PedCli.Add(PedCli);
+            _context.LOGISTICA.Add(LOGISTICA);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (PedCliExists(PedCli.PEDIDO))
+                if (LOGISTICAExists(LOGISTICA.Id))
                 {
                     return Conflict();
                 }
@@ -97,28 +97,28 @@ namespace Kanban.Server.Controllers
                 }
             }
 
-            return CreatedAtAction("GetPedCli", new { PEDIDO = PedCli.PEDIDO }, PedCli);
+            return CreatedAtAction("GetLOGISTICA", new { Id = LOGISTICA.Id }, LOGISTICA);
         }
 
-        // DELETE: api/PedCli/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<PedCli>> DeletePedCli(int PEDIDO)
+        // DELETE: api/Estado/5
+        [HttpDelete("{PEDIDO}")]
+        public async Task<ActionResult<LOGISTICA>> DeleteLOGISTICA(int Id)
         {
-            var PedCli = await _context.PedCli.FindAsync(PEDIDO);
-            if (PedCli == null)
+            var LOGISTICA = await _context.LOGISTICA.FindAsync(Id);
+            if (LOGISTICA == null)
             {
                 return NotFound();
             }
 
-            _context.PedCli.Remove(PedCli);
+            _context.LOGISTICA.Remove(LOGISTICA);
             await _context.SaveChangesAsync();
 
-            return PedCli;
+            return LOGISTICA;
         }
 
-        private bool PedCliExists(int PEDIDO)
+        private bool LOGISTICAExists(int Id)
         {
-            return _context.PedCli.Any(e => e.PEDIDO == PEDIDO);
+            return _context.LOGISTICA.Any(e => e.Id == Id);
         }
     }
 }

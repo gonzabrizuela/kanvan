@@ -3,59 +3,34 @@
 @using Syncfusion.Blazor.Kanban
 @using System.Diagnostics
 
-<SfKanban TValue="TasksModel" KeyField="Status" DataSource="Tasks">
-    <KanbanEvents TValue="TasksModel" DragStart="@onDragStart" DragStop="@onDragStop"></KanbanEvents>
+<SfKanban TValue="KanbanModel" KeyField="CG_ESTADPEDCLI" DataSource="Tasks">
     <KanbanColumns>
-        <KanbanColumn HeaderText="Backlog" KeyField=@(new List<string> { "Open" })></KanbanColumn>
-        <KanbanColumn HeaderText="In Progress" KeyField=@(new List<string> { "InProgress" })></KanbanColumn>
-        <KanbanColumn HeaderText="Testing" KeyField=@(new List<string> { "Testing" })></KanbanColumn>
-        <KanbanColumn HeaderText="Done" KeyField=@(new List<string> { "Close" })></KanbanColumn>
+         @foreach (ColumnModel item in columnData)
+            {
+                 <KanbanColumn HeaderText="@item.HeaderText" KeyField="@item.KeyField"></KanbanColumn>
+            }
     </KanbanColumns>
-    <KanbanCardSettings HeaderField="Id" ContentField="Summary"></KanbanCardSettings>
-    <KanbanSwimlaneSettings KeyField="Assignee" AllowDragAndDrop="true"></KanbanSwimlaneSettings>
+    <KanbanCardSettings HeaderField="Title" ContentField="Summary"></KanbanCardSettings>
+    <KanbanSwimlaneSettings KeyField="Assignee" TextField="Assignee" AllowDragAndDrop=false ShowItemCount=true SortDirection=SortDirection.Ascending ShowEmptyRow=true>
+    </KanbanSwimlaneSettings>
 </SfKanban>
 
 @code {
-    public class TasksModel
-    {
-        public string Id { get; set; }
-        public string Title { get; set; }
-        public string Status { get; set; }
-        public string Summary { get; set; }
-        public string Assignee { get; set; }
-    }
-    public string assignee;
-    public string status;
-    public string id;
+    List<PedCli> Pedclis = new List<PedCli>();
 
-    private void onDragStart(Syncfusion.Blazor.Kanban.DragEventArgs<TasksModel> args)
+    protected override async Task OnInitializedAsync()
     {
-        id = args.Data[0].Id;
-        assignee = args.Data[0].Assignee;
-        status = args.Data[0].Status;
-    }
+        //Pedclis = await Http.GetFromJsonAsync<List<Modelo>>("api/Modelo");
 
-    private void onDragStop(Syncfusion.Blazor.Kanban.DragEventArgs<TasksModel> args)
-    {
-        if (args.Data[0].Assignee != assignee || args.Data[0].Status != status)
-        {
-            // Preventing the drag action from the one swimlane to other swimlane and between different columns
-            args.Cancel = true;
-        }
+        await base.OnInitializedAsync();
     }
-
-    public List<TasksModel> Tasks = new List<TasksModel>()
-{
-        new TasksModel { Id = "Task 1", Title = "BLAZ-29001", Status = "InProgress", Summary = "Improve application performance", Assignee = "Andrew Fuller" },
-        new TasksModel { Id = "Task 2", Title = "BLAZ-29002", Status = "Open", Summary = "Arrange a web meeting with the customer to get new requirements.", Assignee = "Janet Leverling" },
-        new TasksModel { Id = "Task 3", Title = "BLAZ-29003", Status = "InProgress", Summary = "Fix the issues reported in the IE browser.", Assignee = "Janet Leverling" },
-        new TasksModel { Id = "Task 4", Title = "BLAZ-29004", Status = "InProgress", Summary = "Fix cannot open user’s default database SQL error.", Assignee = "Janet Leverling" },
-        new TasksModel { Id = "Task 5", Title = "BLAZ-29005", Status = "Review", Summary = "Fix the issues reported in data binding.", Assignee = "Janet Leverling" },
-        new TasksModel { Id = "Task 6", Title = "BLAZ-29006", Status = "Close", Summary = "Analyze SQL server 2008 connection.", Assignee = "Andrew Fuller" },
-        new TasksModel { Id = "Task 7", Title = "BLAZ-29007", Status = "Close", Summary = "Analyze stored procedures.", Assignee = "Janet Leverling" },
-        new TasksModel { Id = "Task 8", Title = "BLAZ-29008", Status = "Open", Summary = "Enhance editing functionality.", Assignee = "Andrew Fuller" },
-        new TasksModel { Id = "Task 9", Title = "BLAZ-29009", Status = "Review", Summary = "Fix the editing issues reported by the customer.", Assignee = "Janet Leverling" },
-        new TasksModel { Id = "Task 10", Title = "BLAZ-29010", Status = "Testing", Summary = "Fix the issues reported in data binding.", Assignee = "Janet Leverling" },
-        new TasksModel { Id = "Task 11", Title = "BLAZ-29011", Status = "Testing", Summary = "Test editing feature in the IE browser.", Assignee = "Janet Leverling" }
+    private List<ColumnModel> columnData = new List<ColumnModel>() {
+        new ColumnModel(){ HeaderText= "Remitos", KeyField= new List<string>() { "R" } },
+        new ColumnModel(){ HeaderText= "Retira en Planta", KeyField= new List<string>() { "L" } },
+        new ColumnModel(){ HeaderText= "Retira en CABA", KeyField= new List<string>() { "C" } },
+        new ColumnModel(){ HeaderText= "Entrega AERRE", KeyField= new List<string>() { "E" } },
+        new ColumnModel(){ HeaderText= "Inspección", KeyField= new List<string>() { "I" } },
+        new ColumnModel(){ HeaderText= "Facturar", KeyField= new List<string>() { "F" } },
+        new ColumnModel(){ HeaderText= "Pago", KeyField= new List<string>() { "P" } }
     };
 }
