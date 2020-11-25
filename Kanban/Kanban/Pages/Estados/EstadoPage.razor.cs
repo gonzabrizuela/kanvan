@@ -24,7 +24,8 @@ namespace Kanban.Pages.Modelos
         protected List<PedCli> Pedclis = new List<PedCli>();
         protected override async Task OnInitializedAsync()
         {
-            Pedclis = await Http.GetFromJsonAsync<List<PedCli>>("api/Prueba");
+            
+            Pedclis = await Http.GetFromJsonAsync<List<PedCli>>("api/PedCli");
 
             await base.OnInitializedAsync();
         }
