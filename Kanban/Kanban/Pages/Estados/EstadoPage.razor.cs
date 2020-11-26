@@ -22,10 +22,14 @@ namespace Kanban.Pages.Modelos
         public bool Disabled = false;
 
         protected List<PedCli> Pedclis = new List<PedCli>();
+        protected List<Pedidos> Pedidoss = new List<Pedidos>();
+        protected List<Programa> Programas = new List<Programa>();
         protected override async Task OnInitializedAsync()
         {
             
             Pedclis = await Http.GetFromJsonAsync<List<PedCli>>("api/PedCli");
+            Pedidoss = await Http.GetFromJsonAsync<List<Pedidos>>("api/Pedidos");
+            Programas = await Http.GetFromJsonAsync<List<Programa>>("api/Programa");
 
             await base.OnInitializedAsync();
         }

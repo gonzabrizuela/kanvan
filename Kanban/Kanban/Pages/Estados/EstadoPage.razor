@@ -4,7 +4,7 @@
 @using System.Diagnostics
 @inherits Kanban.Pages.Modelos.ModeloPageBase
 
-<SfKanban TValue="PedCli" KeyField="@nameof(PedCli.CG_ESTADPEDCLI)" DataSource="Pedclis">
+<SfKanban TValue="PedCli" KeyField="@nameof(PedCli.CG_ESTADO)" DataSource="Pedclis">
     <KanbanColumns>
         @foreach (ColumnModel item in columnData)
         {
@@ -12,7 +12,7 @@
         }
     </KanbanColumns>
     <KanbanCardSettings HeaderField="@nameof(PedCli.PEDIDO)" ContentField="@nameof(PedCli.PEDIDO)"></KanbanCardSettings>
-    <KanbanSwimlaneSettings KeyField="@nameof(PedCli.CG_ESTADPEDCLI)" TextField="@nameof(PedCli.PEDIDO)" AllowDragAndDrop=false ShowItemCount=true SortDirection=SortDirection.Ascending ShowEmptyRow=true>
+    <KanbanSwimlaneSettings KeyField="@nameof(PedCli.PEDIDO)" TextField="@nameof(PedCli.PEDIDO)" AllowDragAndDrop=false ShowItemCount=true SortDirection=SortDirection.Ascending ShowEmptyRow=true>
     </KanbanSwimlaneSettings>
 </SfKanban>
 
@@ -23,8 +23,10 @@
                     @ref="Grid" DataSource="@Pedclis" AllowExcelExport="true" AllowRowDragAndDrop="true" AllowGrouping="true"
                     AllowSorting="true" AllowPaging="true" AllowFiltering="true">
                 <Syncfusion.Blazor.Grids.GridColumns>
-                    <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(PedCli.PEDIDO) HeaderText="Id" IsPrimaryKey="true" Width="200"></Syncfusion.Blazor.Grids.GridColumn>
+                    <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(PedCli.PEDIDO) HeaderText="Pedcli Ped" IsPrimaryKey="true" Width="200"></Syncfusion.Blazor.Grids.GridColumn>
                     <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(PedCli.ORCO) HeaderText="Marca" Width="200"></Syncfusion.Blazor.Grids.GridColumn>
+                    <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(Programa.PEDIDO) HeaderText="Prog Ped" IsPrimaryKey="true" Width="200"></Syncfusion.Blazor.Grids.GridColumn>
+                    <Syncfusion.Blazor.Grids.GridColumn Field=@nameof(Pedidos.PEDIDO) HeaderText="Ped Ped" Width="200"></Syncfusion.Blazor.Grids.GridColumn>
                 </Syncfusion.Blazor.Grids.GridColumns>
             </Syncfusion.Blazor.Grids.SfGrid>
         </div>

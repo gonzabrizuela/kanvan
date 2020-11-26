@@ -27,15 +27,8 @@ namespace Kanban
         [HttpGet]
         public IEnumerable<PedCli> Get(string PEDIDO)
         {
-            try
-            {
-                string xSQL = string.Format("SELECT * from pedcli");
-                return _context.PedCli.FromSqlRaw(xSQL).ToList<PedCli>();
-            }
-            catch
-            {
-                return new List<PedCli>();
-            }
+            string xSQL = string.Format("SELECT Pedcli.* FROM((Pedcli INNER JOIN Programa ON Pedcli.PEDIDO = Programa.PEDIDO) INNER JOIN Pedidos ON pedcli.PEDIDO = Pedidos.PEDIDO) where(pedidos.FLAG = 0 AND Programa.CG_ESTADO = 3 AND Pedidos.CG_ORDF != 0 AND(Pedidos.TIPOO = 1))  ORDER BY Pedcli.PEDIDO DESC");
+            return _context.PedCli.FromSqlRaw(xSQL).ToList<PedCli>();
         }
     }
 }

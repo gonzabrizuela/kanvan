@@ -11,12 +11,8 @@ namespace Kanban
         [Key]
         public decimal REGISTRO { get; set; } = 0;
         public int PEDIDO { get; set; } = 0;
-
         public int CG_ESTADO { get; set; } = 0;
-
         public int CG_ESTADOCARGA { get; set; } = 0;
-
-        public DateTime FE_CIERRE { get; set; } = 0;
-
+        public DateTime FE_CIERRE { get; set; }
     }
 }
