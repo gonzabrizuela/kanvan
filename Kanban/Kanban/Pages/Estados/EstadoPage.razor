@@ -4,19 +4,19 @@
 @using System.Diagnostics
 @inherits Kanban.Pages.Modelos.ModeloPageBase
 
-<SfKanban TValue="PedCli" KeyField="@nameof(PedCli.CG_ESTADO)" DataSource="Pedclis">
+<SfKanban TValue="PedCli" KeyField="CG_ESTADO" DataSource="@Pedclis">
     <KanbanColumns>
         @foreach (ColumnModel item in columnData)
         {
             <KanbanColumn HeaderText="@item.HeaderText" KeyField="@item.KeyField"></KanbanColumn>
         }
     </KanbanColumns>
-    <KanbanCardSettings HeaderField="@nameof(PedCli.PEDIDO)" ContentField="@nameof(PedCli.PEDIDO)"></KanbanCardSettings>
-    <KanbanSwimlaneSettings KeyField="@nameof(PedCli.PEDIDO)" TextField="@nameof(PedCli.PEDIDO)" AllowDragAndDrop=false ShowItemCount=true SortDirection=SortDirection.Ascending ShowEmptyRow=true>
-    </KanbanSwimlaneSettings>
+    <KanbanCardSettings HeaderField="@nameof(PedCli.PEDIDO)" ContentField="@nameof(PedCli.DES_ART)"></KanbanCardSettings>
+    @*<KanbanSwimlaneSettings KeyField="@nameof(PedCli.CG_ESTADO)" TextField="@nameof(PedCli.CG_ESTADO)" AllowDragAndDrop=false ShowItemCount=true SortDirection=SortDirection.Ascending ShowEmptyRow=true>
+    </KanbanSwimlaneSettings>*@
 </SfKanban>
 
-<div class="col-lg-12 control-section">
+@*<div class="col-lg-12 control-section">
     <div class="content-wrapper">
         <div class="row">
             <Syncfusion.Blazor.Grids.SfGrid AllowReordering="true" ShowColumnChooser="true" ShowColumnMenu="true" AllowResizing="true" EnablePersistence="true"
@@ -31,7 +31,7 @@
             </Syncfusion.Blazor.Grids.SfGrid>
         </div>
     </div>
-</div>
+</div>*@
 
 
 @code {
