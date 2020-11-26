@@ -10,8 +10,20 @@ namespace Kanban
     public class Pedidos
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int PEDIDO { get; set; } = 0;
-        public string REMITO { get; set; } = "";
-        public int FLAG { get; set; } = 0;
+        public int REGISTRO { get; set; } = 0;//
+        public int PEDIDO { get; set; } = 0;//
+        public string REMITO { get; set; } = "";//
+        public int FLAG { get; set; } = 0;//
+
+        public int CG_ORDF { get; set; } = 0;
+
+        public int TIPOO { get; set; } = 0;//
+
+        public int CG_TIRE { get; set; } = 0;//
+
+
+
+
+
     }
 }

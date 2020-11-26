@@ -9,7 +9,14 @@ namespace Kanban
     public class Programa
     {
         [Key]
-        public int REGISTRO { get; set; } = 0;
+        public decimal REGISTRO { get; set; } = 0;
         public int PEDIDO { get; set; } = 0;
+
+        public int CG_ESTADO { get; set; } = 0;
+
+        public int CG_ESTADOCARGA { get; set; } = 0;
+
+        public DateTime FE_CIERRE { get; set; } = 0;
+
     }
 }
