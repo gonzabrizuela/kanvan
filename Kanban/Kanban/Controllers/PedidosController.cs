@@ -6,9 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Kanban.Server.DataAccess;
-using Kanban.Shared.Models;
 
-namespace Kanban.Server.Controllers
+namespace Kanban
 {
     [Route("api/[controller]")]
     [ApiController]

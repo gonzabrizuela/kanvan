@@ -29,7 +29,7 @@ namespace Kanban
         {
             try
             {
-                string xSQL = string.Format("SELECT PEDIDO, ORCO from pedcli");
+                string xSQL = string.Format("SELECT * from pedcli");
                 return _context.PedCli.FromSqlRaw(xSQL).ToList<PedCli>();
             }
             catch
