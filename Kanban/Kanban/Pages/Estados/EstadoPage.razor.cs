@@ -21,6 +21,11 @@ namespace Kanban.Pages.Modelos
         public bool Enabled = true;
         public bool Disabled = false;
 
+        public string mensaje = "Hola";
+        public string mensaje2 = "Hola";
+        public string mensaje3 = "Hola";
+
+        //protected List<KanbanLOG> KB = new List<KanbanLOG>();
         protected List<PedCli> Pedclis = new List<PedCli>();
         protected List<Pedidos> Pedidoss = new List<Pedidos>();
         protected List<Programa> Programas = new List<Programa>();
@@ -30,6 +35,7 @@ namespace Kanban.Pages.Modelos
             Pedclis = await Http.GetFromJsonAsync<List<PedCli>>("api/PedCli");
             Pedidoss = await Http.GetFromJsonAsync<List<Pedidos>>("api/Pedidos");
             Programas = await Http.GetFromJsonAsync<List<Programa>>("api/Programa");
+            //KB = await Http.GetFromJsonAsync<List<KanbanLOG>>("api/KanbanLOG");
 
             await base.OnInitializedAsync();
         }
