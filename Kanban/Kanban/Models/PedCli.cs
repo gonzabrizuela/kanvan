@@ -19,5 +19,7 @@ namespace Kanban
         public string DIRENT { get; set; } = "";
         public string CG_ESTADO { get; set; } = "";
         public int CG_ESTADPEDCLI { get; set; } = 0;
+        public string ESTADO_LOGISTICA { get; set; } = "";
+
     }
 }

@@ -7,7 +7,7 @@
 <label>@mensaje</label>
 <label>@mensaje2</label>
 <label>@mensaje3</label>
-<SfKanban TValue="PedCli" KeyField="CG_ESTADO" DataSource="@Pedclis" AllowDragAndDrop="true">
+<SfKanban TValue="PedCli" KeyField="ESTADO_LOGISTICA" DataSource="@Pedclis" AllowDragAndDrop="true">
     <KanbanEvents TValue="PedCli" DragStart="@onDragStart" DragStop="@onDragStop"></KanbanEvents>
     <KanbanColumns>
         @foreach (ColumnModel item in columnData)
@@ -189,14 +189,14 @@
     </div>*@
 @code {
     private List<ColumnModel> columnData = new List<ColumnModel>() {
-        new ColumnModel(){ HeaderText= "Clasificar", KeyField= new List<string>() { "E" } },
-        new ColumnModel(){ HeaderText= "Remitos", KeyField= new List<string>() { "1" } },
-        new ColumnModel(){ HeaderText= "Retira en Planta", KeyField= new List<string>() { "2" } },
-        new ColumnModel(){ HeaderText= "Retira en CABA", KeyField= new List<string>() { "3" } },
-        new ColumnModel(){ HeaderText= "Entrega AERRE", KeyField= new List<string>() { "4" } },
-        new ColumnModel(){ HeaderText= "Inspección", KeyField= new List<string>() { "5" } },
-        new ColumnModel(){ HeaderText= "Facturar", KeyField= new List<string>() { "6" } },
-        new ColumnModel(){ HeaderText= "Pago", KeyField= new List<string>() { "7" } }
+        new ColumnModel(){ HeaderText= "Clasificar", KeyField= new List<string>() { "Clasificar" } },
+        new ColumnModel(){ HeaderText= "Remitos", KeyField= new List<string>() { "Remitos" } },
+        new ColumnModel(){ HeaderText= "Retira en Planta", KeyField= new List<string>() { "RetiraenPlanta" } },
+        new ColumnModel(){ HeaderText= "Retira en CABA", KeyField= new List<string>() { "RetiraenCABA" } },
+        new ColumnModel(){ HeaderText= "Entrega AERRE", KeyField= new List<string>() { "EntregaAERRE" } },
+        new ColumnModel(){ HeaderText= "Inspección", KeyField= new List<string>() { "Inspeccion" } },
+        new ColumnModel(){ HeaderText= "Facturar", KeyField= new List<string>() { "Facturar" } },
+        new ColumnModel(){ HeaderText= "Pago", KeyField= new List<string>() { "Pago" } }
     };
     public string Cliente;
     private void onDragStart(Syncfusion.Blazor.Kanban.DragEventArgs<PedCli> args)
